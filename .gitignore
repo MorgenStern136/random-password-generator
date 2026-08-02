@@ -1,0 +1,13 @@
+# Python-generated files
+__pycache__/
+*.pyc
+
+# Virtual environment
+.venv/
+venv/
+
+# macOS-generated files
+.DS_Store
+
+# VS Code personal settings
+.vscode/
