@@ -61,4 +61,4 @@ Never share a real password or passphrase after generating it.
 
 ## Author
 
-RZ
+MS
