@@ -25,6 +25,7 @@ class GeneratorApp:
         self.add_number_var = tk.BooleanVar(value=True)
         self.add_symbol_var = tk.BooleanVar(value=True)
         self.status_var = tk.StringVar(value="Ready")
+        self.character_count_var = tk.StringVar(value="0 characters")
 
         self.create_widgets()
 
@@ -81,12 +82,28 @@ class GeneratorApp:
             ipady=10,
         )
 
+        button_frame = ttk.Frame(result_frame)
+        button_frame.pack()
+
         copy_button = ttk.Button(
-            result_frame,
+            button_frame,
             text="Copy to clipboard",
             command=self.copy_result,
         )
-        copy_button.pack()
+        copy_button.grid(row=0, column=0, padx=5)
+
+        clear_button = ttk.Button(
+            button_frame,
+            text="Clear",
+            command=self.clear_result,
+        )
+        clear_button.grid(row=0, column=1, padx=5)
+
+        character_count_label = ttk.Label(
+            result_frame,
+            textvariable=self.character_count_var,
+        )
+        character_count_label.pack(pady=(10, 0))
 
         status_label = ttk.Label(
             self.root,
@@ -214,7 +231,9 @@ class GeneratorApp:
             return
 
         password = generate_password(length)
+
         self.result_var.set(password)
+        self.character_count_var.set(f"{len(password)} characters")
         self.status_var.set("Password generated successfully")
 
     def handle_generate_passphrase(self):
@@ -255,7 +274,13 @@ class GeneratorApp:
         )
 
         self.result_var.set(passphrase)
+        self.character_count_var.set(f"{len(passphrase)} characters")
         self.status_var.set("Passphrase generated successfully")
+
+    def clear_result(self):
+        self.result_var.set("")
+        self.character_count_var.set("0 characters")
+        self.status_var.set("Result cleared")
 
     def copy_result(self):
         result = self.result_var.get()
@@ -282,4 +307,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-    
